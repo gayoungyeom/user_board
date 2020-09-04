@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
 from django.contrib.auth.models import User
+from django.contrib import auth
 
 # Create your views here.
 def home(request):
@@ -53,3 +54,20 @@ def signup(request):
         return redirect('home')
     # Show Signup Form
     return render(request, 'signup.html')
+
+def login(request):
+    # Login Form을 누가 제출했을 때
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(request, username=username, password=password)
+        # 해당 데이터의 유저가 있는 경우
+        if user is not None:
+            auth.login(request, user)
+            return redirect('home')
+        # 없는 경우
+        else:
+            return render(request, 'login.html', {'login_error': 'username or password is incorrect.'})
+    # Show Login Form
+    else:
+        return render(request, 'login.html')
