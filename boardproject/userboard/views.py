@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Post
+from django.contrib.auth.models import User
+
 # Create your views here.
 def home(request):
     posts = Post.objects
@@ -42,3 +44,12 @@ def delete(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     post.delete()
     return redirect('home')
+
+def signup(request):
+    # Signup Form을 누가 제출했을 때
+    if request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2']:
+            User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+        return redirect('home')
+    # Show Signup Form
+    return render(request, 'signup.html')
