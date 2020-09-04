@@ -23,3 +23,17 @@ def create(request):
     # Show Crete Form
     else: # request.method == 'GET'
         return render(request, 'create.html')
+
+def update(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    # Edit Post
+    if request.method == 'POST':
+        post.title = request.POST['title']
+        post.description = request.POST['description']
+        post.pub_date = timezone.datetime.now()
+        post.save()
+        return redirect('detail', post.id) 
+
+    # Show Update Form
+    else:
+        return render(request, 'update.html', {'post': post})

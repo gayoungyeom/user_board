@@ -61,17 +61,22 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div>
         <div class="container">
-            <br><br><br>
-            <h1>{{ post.title }}</h1>
-            <p>{{ post.description }}</p>
-            <div class=" text-muted">{{ post.pub_date.date }}</div>
-            <br>
-            <p>
-                <a class="btn btn-default" href="{% url 'update' post.id %}" role="button">Edit</a>
-                <a class="btn btn-default" href="#" role="button">Delete</a>
-            </p>
+            <form action="{% url 'update' post.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token%}
+                <br><br><br>
+                <h3>Title</h3>
+                <input type="text" name="title" value="{{ post.title }}" />
+                <br />
+                <br />
+                <h3>Content</h3>
+                <textarea cols="50" rows="15" name="description">{{ post.description }}</textarea>
+                <br />
+                <br />
+                <input type="submit" value="Save" />
+            </form>
         </div>
     </div>
+
 
     <div class="container">
         <hr>
