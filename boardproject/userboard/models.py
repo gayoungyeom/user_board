@@ -10,4 +10,4 @@ class Post(models.Model):
         return self.title
 
     def summary(self):
-        return self.description[:20]
+        return self.description[:150]

@@ -59,32 +59,27 @@
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div>
         <div class="container">
-            <h1>Welcome!</h1>
-            <p>This is a place to post everything you want.</p>
-            <p><a class="btn btn-default btn-lg" href="{% url 'create' %}" role="button">Add Post</a></p>
+            <form action="{% url 'create' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token%}
+                <br><br><br>
+                <h3>Title</h3>
+                <input type="text" name="title" />
+                <br />
+                <br />
+                <h3>Content</h3>
+                <textarea cols="50" rows="15" name="description"></textarea>
+                <br />
+                <br />
+                <input type="submit" value="Save" />
+            </form>
         </div>
     </div>
 
+
     <div class="container">
-
-        <!-- Post objects -->
-        <div class="row">
-            {% for post in posts.all %}
-            <div class="col-md-4">
-                <h2>{{ post.title }}</h2>
-                <p>{{ post.summary }}</p>
-                <div class=" text-muted">{{ post.pub_date.date }}
-                </div>
-                <p><a class="btn btn-default" href="{% url 'detail' post.id %}" role="button">View details &raquo;</a>
-                </p>
-            </div>
-            {% endfor %}
-        </div>
-
         <hr>
-
         <footer>
             <p>&copy; Bootstrap</p>
             <p>Developed by gayoung</p>
