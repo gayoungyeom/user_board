@@ -51,8 +51,13 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
-                    <a class="btn btn-default" href="{% url 'login' %}" role="button">Log in</a>
-                    <a class="btn btn-default" href="{% url 'signup' %}" role="button">Sign up</a>
+                    <!-- 로그인 여부 판단 -->
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-default" href="{% url 'logout' %}" role="button">Logout</a>
+                    {% else %}
+                    <a class="btn btn-default" href="{% url 'login' %}" role="button">Login</a>
+                    <a class="btn btn-default" href="{% url 'signup' %}" role="button">Signup</a>
+                    {% endif %}
                 </form>
             </div>
             <!--/.navbar-collapse -->

@@ -71,3 +71,7 @@ def login(request):
     # Show Login Form
     else:
         return render(request, 'login.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect('home')
