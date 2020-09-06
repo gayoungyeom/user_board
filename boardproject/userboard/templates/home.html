@@ -25,15 +25,32 @@
 {% block content %}
 <!-- Post objects -->
 <div class="row">
+    <!-- 로그인 한 상태 -->
+    {% if user.is_authenticated %}
     {% for post in posts.all %}
     <div class="col-md-4">
         <h2>{{ post.title }}</h2>
         <p>{{ post.summary }}</p>
-        <div class=" text-muted">{{ post.pub_date.date }}
-        </div>
+        <div>{{ post.author }}</div>
+        <div class=" text-muted">{{ post.pub_date.date }}</div>
         <p><a class="btn btn-default" href="{% url 'detail' post.id %}" role="button">View details &raquo;</a>
         </p>
     </div>
     {% endfor %}
+
+    <!-- 로그인 하지 않은 상태 -->
+    {% else %}
+    {% for post in posts.all %}
+    <div class="col-md-4">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.summary }}</p>
+        <div>{{ post.author }}</div>
+        <div class=" text-muted">{{ post.pub_date.date }}</div>
+        <p><a class="btn btn-default" href="{% url 'login' %}" role="button">View details &raquo;</a>
+        </p>
+    </div>
+    {% endfor %}
+    {% endif %}
+
 </div>
 {% endblock %}

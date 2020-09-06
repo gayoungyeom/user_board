@@ -12,11 +12,14 @@
         <br><br><br>
         <h1>{{ post.title }}</h1>
         <p>{{ post.description }}</p>
-        <div class=" text-muted">{{ post.pub_date.date }}</div>
+        <div>{{ post.author }}</div>
+        <div class="text-muted">{{ post.pub_date.date }}</div>
         <br>
         <p>
+            {% if post.author == request.user %}
             <a class="btn btn-default" href="{% url 'update' post.id %}" role="button">Edit</a>
             <a class="btn btn-default" href="{% url 'delete' post.id %}" role="button">Delete</a>
+            {% endif %}
         </p>
     </div>
 </div>

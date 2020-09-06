@@ -20,6 +20,7 @@ def create(request):
         post.title = request.POST['title']
         post.description = request.POST['description']
         post.pub_date = timezone.datetime.now()
+        post.author = request.user
         post.save()
         return redirect('detail', post.id)
 
