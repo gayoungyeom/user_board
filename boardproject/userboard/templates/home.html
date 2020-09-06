@@ -11,7 +11,10 @@
         {% if user.is_authenticated %}
         <h1>Welcome {{ user.username }} !</h1>
         <p>This is a place to post everything you want.</p>
-        <p><a class="btn btn-default btn-lg" href="{% url 'create' %}" role="button">Add Post</a></p>
+        <p>
+            <a class="btn btn-default btn-lg" href="{% url 'mypage' user.id %}" role="button">My Page</a>
+            <a class="btn btn-default btn-lg" href="{% url 'create' %}" role="button">Add Post</a>
+        </p>
         <!-- 로그인 하지 않은 상태 -->
         {% else %}
         <h1>Welcome!</h1>

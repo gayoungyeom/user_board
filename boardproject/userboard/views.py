@@ -76,3 +76,8 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+def mypage(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    posts = Post.objects
+    return render(request, 'mypage.html', {'user_id': user_id, 'posts': posts})
